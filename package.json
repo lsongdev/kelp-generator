@@ -1,0 +1,21 @@
+{
+  "name": "kelp-generator",
+  "version": "0.0.2",
+  "description": "simple file generator",
+  "main": "index.js",
+  "bin": "./bin/index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "author": "Lsong",
+  "license": "MIT",
+  "dependencies": {
+    "gray-matter": "^4.0.2",
+    "inputformat-to-jstransformer": "^1.4.0",
+    "jstransformer": "^1.0.0",
+    "jstransformer-ejs": "^0.2.0",
+    "jstransformer-handlebars": "^1.1.0",
+    "marked": "^0.7.0",
+    "recursive-readdir": "^2.2.2"
+  }
+}
