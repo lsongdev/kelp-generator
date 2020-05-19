@@ -1,9 +1,11 @@
 {
-  "name": "kelp-generator",
-  "version": "0.0.2",
+  "name": "@kelpjs/gen",
+  "version": "0.0.1",
   "description": "simple file generator",
   "main": "index.js",
-  "bin": "./bin/index.js",
+  "bin": {
+    "kgen": "./bin/index.js"
+  },
   "scripts": {
     "test": "node test"
   },

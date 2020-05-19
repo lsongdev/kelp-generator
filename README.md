@@ -1,19 +1,19 @@
-## kelp-generator
+## @kelpjs/gen
 
 > simple file generator
 
 ### Installation
 
 ```bash
-$ npm install kelp-generator
+$ npm install @kelpjs/gen
 ```
 
 ### Example
 
 ```js
-const generator = require('kelp-generator');
+const generate = require('@kelpjs/gen');
 
-generator({
+generate({
   source: './src',
   output: './build',
   plugins: {
@@ -23,19 +23,19 @@ generator({
 
 ```
 
-kelp-generator/flow example
+@kelpjs/gen/flow example
 
 ```js
-const flow       = require('kelp-generator/flow');
-const read       = require('kelp-generator/plugins/read');
-const source     = require('kelp-generator/plugins/source');
-const output     = require('kelp-generator/plugins/output');
-const matter     = require('kelp-generator/plugins/matter');
-const layouts    = require('kelp-generator/plugins/layouts');
-const metadata   = require('kelp-generator/plugins/metadata');
-const markdown   = require('kelp-generator/plugins/markdown');
-const permalink  = require('kelp-generator/plugins/permalink');
-const collection = require('kelp-generator/plugins/collection');
+const flow       = require('@kelpjs/gen/flow');
+const read       = require('@kelpjs/gen/plugins/read');
+const source     = require('@kelpjs/gen/plugins/source');
+const output     = require('@kelpjs/gen/plugins/output');
+const matter     = require('@kelpjs/gen/plugins/matter');
+const layouts    = require('@kelpjs/gen/plugins/layouts');
+const metadata   = require('@kelpjs/gen/plugins/metadata');
+const markdown   = require('@kelpjs/gen/plugins/markdown');
+const permalink  = require('@kelpjs/gen/plugins/permalink');
+const collection = require('@kelpjs/gen/plugins/collection');
 
 flow()
 .use(source('./src'))
