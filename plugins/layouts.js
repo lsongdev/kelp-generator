@@ -3,8 +3,7 @@ const assert = require('assert');
 const jstransformer = require('jstransformer');
 const toTransformer = require('inputformat-to-jstransformer');
 
-const createRender = options => {
-  const { templates = 'templates' } = options;
+const createRender = ({ templates = 'templates' }) => {
   return async (layout, data) => {
     layout = path.join(templates, layout);
     const ext = layout.split('.').pop();
@@ -16,8 +15,7 @@ const createRender = options => {
   };
 };
 
-const layouts = (options = {}) => {
-  const { layout: defaultLayout = 'layout.hbs' } = options;
+const layouts = ({ layout: defaultLayout = 'layout.hbs', ...options } = {}) => {
   const render = createRender(options);
   return async files => {
     for (const filename in files) {

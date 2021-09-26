@@ -8,7 +8,7 @@
 </head>
 <body>
     <% for(const post of posts) { %>
-    <li><%= post.title %></li>
+    <li><a href="<%= post.link %>"><%= post.title %></a></li>
     <%}%>
 </body>
 </html>

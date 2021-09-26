@@ -5,9 +5,7 @@ const matter = () => {
     for (const name in files) {
       const file = files[name];
       const { data: meta, content } = grayMatter(file.content);
-      files[name] = Object.assign(file, {
-        content
-      }, meta);
+      files[name] = Object.assign(file, { content }, meta);
     }
     return files;
   };

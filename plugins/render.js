@@ -7,7 +7,7 @@ module.exports = (name = 'hbs') => {
   assert.ok(transformer, name);
   const transform = jstransformer(transformer);
   return async files => {
-    for (let name in files) {
+    for (const name in files) {
       const file = files[name];
       const rendered = await transform.render(file.content, file);
       files[name].content = rendered.body;

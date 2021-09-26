@@ -33,11 +33,11 @@ const ensureDir = async dir => {
 const output = dir => {
   dir = path.resolve(dir);
   return async files => {
-    for (const filename in files) {
-      const file = files[filename];
-      const x = path.join(dir, filename);
-      await ensureDir(path.dirname(x));
-      await writeFile(x, file.content);
+    for (const name in files) {
+      const file = files[name];
+      const filename = path.join(dir, name);
+      await ensureDir(path.dirname(filename));
+      await writeFile(filename, file.content);
     }
   };
 };

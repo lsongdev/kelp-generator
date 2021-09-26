@@ -1,12 +1,12 @@
 const path = require('path');
 const readdir = require('recursive-readdir');
 
-const source = dir => {
+const source = (dir = '.') => {
+  dir = path.resolve(dir);
   return async () => {
-    const x = path.resolve(dir);
-    const files = await readdir(x);
+    const files = await readdir(dir);
     return files.reduce((files, filename) => {
-      const name = path.relative(x, filename);
+      const name = path.relative(dir, filename);
       files[name] = { name, filename };
       return files;
     }, {});

@@ -1,4 +1,3 @@
-
 const path = require('path');
 const Flow = require('./flow');
 const read = require('./plugins/read');
@@ -9,7 +8,7 @@ const output = require('./plugins/output');
 const cwd = process.cwd();
 
 const getPlugin = name => {
-  const filename = require.resolve(name, {
+  const filename = require.resolve(`./${name}`, {
     paths: [cwd, path.join(__dirname, './plugins')]
   });
   return require(filename);

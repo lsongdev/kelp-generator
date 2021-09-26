@@ -13,26 +13,27 @@ const builtin = {
   date: now.getDate()
 };
 
-const createReplacer = options => {
+const createReplacer = defaultPattern => {
   return file => {
-    const { permalink = options } = file;
-    if (!permalink) return;
+    let { permalink } = file;
+    if (typeof permalink !== 'string' || permalink === true)
+      permalink = defaultPattern;
     const obj = Object.assign({}, file, builtin);
     return permalink.replace(/:([a-z]+)/ig, (_, part) => slug(obj[part]));
   };
 };
 
-
-
-const permalink = options => {
-  const replace = createReplacer(options);
+const permalink = pattern => {
+  const rename = createReplacer(pattern);
   return files => {
-    for (const name in files) {
+    for (let name in files) {
       const file = files[name];
-      if (!file.permalink)
-        continue;
-      files[replace(file) || name] = file;
-      delete files[name];
+      if (file.permalink) {
+        name = rename(file) || name;
+        files[name] = file;
+        delete files[name];
+      }
+      file.link = name;
     }
     return files;
   };

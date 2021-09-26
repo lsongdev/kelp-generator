@@ -13,7 +13,7 @@ let [configFile] = argv
 const readConfig = async () => {
   if (configFile) require(path.resolve(configFile));
   try {
-    configFile = require.resolve(`kgen.config`, { paths: [cwd] });
+    configFile = require.resolve(`./kgen.config`, { paths: [cwd] });
     if (configFile) return require(configFile);
   } catch (e) {
     if (e.code !== 'MODULE_NOT_FOUND') {

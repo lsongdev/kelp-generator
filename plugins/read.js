@@ -5,9 +5,9 @@ const readFile = promisify(fs.readFile);
 
 const read = () => {
   return async files => {
-    for(const name in files) {
-      const { filename } = files[name];
-      files[name].content = await readFile(filename);
+    for (const name in files) {
+      const file = files[name];
+      file.content = await readFile(file.filename);
     }
     return files;
   }
