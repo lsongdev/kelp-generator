@@ -21,8 +21,11 @@ const Render = () => {
   return async files => {
     for (const name in files) {
       const file = files[name];
-      const render = createRender({ filename: file.filename });
+      const [basename, ext] = parseFilename(name);
+      const render = createRender({ engine: ext });
       file.content = await render(file.content);
+      files[basename] = file;
+      delete files[name];
     }
   };
 };
