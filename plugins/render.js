@@ -23,10 +23,11 @@ const Render = () => {
       const file = files[name];
       const [basename, ext] = parseFilename(name);
       const render = createRender({ engine: ext });
-      file.content = await render(file.content);
+      file.content = await render(file.content, file);
       files[basename] = file;
       delete files[name];
     }
+    return files;
   };
 };
 
