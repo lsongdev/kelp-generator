@@ -1,27 +1,15 @@
-const path = require('path');
-const assert = require('assert');
-const jstransformer = require('jstransformer');
-const toTransformer = require('inputformat-to-jstransformer');
-
-const createRender = ({ templates = 'templates' }) => {
-  return async (layout, data) => {
-    layout = path.join(templates, layout);
-    const ext = layout.split('.').pop();
-    const transformer = toTransformer(ext);
-    assert.ok(transformer, ext);
-    const transform = jstransformer(transformer);
-    const rendered = await transform.renderFileAsync(layout, data);
-    return rendered.body;
-  };
-};
+const { readFile } = require('fs').promises;
+const { createRender, parseFilename } = require('./render');
 
 const layouts = ({ layout: defaultLayout = 'layout.hbs', ...options } = {}) => {
-  const render = createRender(options);
   return async files => {
-    for (const filename in files) {
-      const file = files[filename];
+    for (const name in files) {
+      const file = files[name];
       const { layout = defaultLayout } = file;
-      file.content = await render(layout, file);
+      const layoutContent = await readFile(layout);
+      const [, ext] = parseFilename(layout);
+      const render = createRender({ engine: ext });
+      file.content = await render(layoutContent, file);
     }
     return files;
   };

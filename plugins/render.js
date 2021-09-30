@@ -1,17 +1,32 @@
-const assert = require('assert');
 const jstransformer = require('jstransformer');
 const toTransformer = require('inputformat-to-jstransformer');
 
-module.exports = (name = 'hbs') => {
-  const transformer = toTransformer(name);
-  assert.ok(transformer, name);
+const parseFilename = filename => {
+  const a = filename.split('.');
+  const ext = a.pop();
+  const basename = a.join('.');
+  return [basename, ext];
+};
+
+const createRender = ({ engine = 'hbs' } = {}) => {
+  const transformer = toTransformer(engine);
   const transform = jstransformer(transformer);
+  return async (content, data) => {
+    const rendered = await transform.render(content, data);
+    return rendered.body;
+  };
+};
+
+const Render = () => {
   return async files => {
     for (const name in files) {
       const file = files[name];
-      const rendered = await transform.render(file.content, file);
-      files[name].content = rendered.body;
+      const render = createRender({ filename: file.filename });
+      file.content = await render(file.content);
     }
-    return files;
-  }
+  };
 };
+
+Render.parseFilename = parseFilename;
+Render.createRender = createRender;
+module.exports = Render;
