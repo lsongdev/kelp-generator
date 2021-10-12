@@ -1,7 +1,7 @@
 {
   "name": "@kelpjs/gen",
-  "version": "0.0.6",
-  "description": "simple file generator",
+  "version": "0.0.7",
+  "description": "Simple file generator",
   "main": "index.js",
   "bin": {
     "kgen": "./bin/kgen.js"

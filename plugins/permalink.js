@@ -29,9 +29,9 @@ const permalink = pattern => {
     for (let name in files) {
       const file = files[name];
       if (file.permalink) {
+        delete files[name];
         name = rename(file) || name;
         files[name] = file;
-        delete files[name];
       }
       file.link = name;
     }
